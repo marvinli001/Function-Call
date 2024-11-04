@@ -1,0 +1,30 @@
+{
+  "url": "https://api.serper.dev/search",
+  "method": "POST",
+  "headers": {
+    "X-API-KEY": "{{ENV.serper_api_key}}",
+    "Content-Type": "application/json"
+  },
+  "input": {
+    "type": "text",
+    "required": true
+  },
+  "body": {
+    "type": "json", 
+    "content": {
+      "q": "{{DATA}}"
+    }
+  },
+  "response": {
+    "content": {
+      "input_type": "json",
+      "output_type": "html",
+      "output": "<b>搜索结果:</b>\n{{#each DATA.organic}}<b>{{title}}</b>\n{{snippet}}\n来源: {{link}}\n\n{{/each}}"
+    },
+    "error": {
+      "input_type": "json",
+      "output_type": "text",
+      "output": "Error: {{message}}"
+    }
+  }
+}
